@@ -1,13 +1,21 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from config.settings import AUTH_PASSWORD_VALIDATORS
+import rooms
 from . import models
+
+
+class RoomInline(admin.TabularInline):
+
+    model = rooms.models.Room
 
 
 @admin.register(models.User)
 class CustomUserAdmin(UserAdmin):
 
     """Custom User Admin"""
+
+    inlines = (RoomInline, )
 
     fieldsets = UserAdmin.fieldsets + (
         (
@@ -40,3 +48,4 @@ class CustomUserAdmin(UserAdmin):
         "is_staff",
         "is_superuser",
     )
+

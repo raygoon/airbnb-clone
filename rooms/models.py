@@ -56,7 +56,7 @@ class Photo(core_models.TimeStampedModel):
     """Photo Model Definition"""
 
     caption = models.CharField(max_length=80)
-    file = models.ImageField()
+    file = models.ImageField(upload_to="room_photos")
 
     # 파이썬 코드는 수직해석이라서 Room 클래스의 뒤쪽에 있어야 하지만,
     # 클래스 코드의 위치를 변경하지 않고 아래처럼 클래스네임을 string으로 처리하는 방법을 사용할 수 있다. ("Room")
@@ -101,11 +101,20 @@ class Room(core_models.TimeStampedModel):
 
     # Rooms model row 위쪽에 나오는 Rooms Object ID 대신 user 이름이 나오도록 __str__을 사용해서 아래와 같이 세팅해 줄수 있다.
     def __str__(self):
-        return self.name
+        return str(self.name)
+
+    def save(self, *args, **kwargs):
+        self.city = self.city.title()
+        super().save(*args, **kwargs)
 
     def total_rating(self):
+        """ 전체 통계 계산 """
         all_reviews = self.reviews.all()
         all_ratings = 0
-        for review in all_reviews:
-            all_ratings += review.rating_average()
-        return all_ratings / len(all_reviews)
+        if (all_reviews.count() > 0):
+            for review in all_reviews:
+                all_ratings += review.rating_average()
+            return round(all_ratings / len(all_reviews), 2)
+        return 0
+
+    total_rating.short_description = "Avg."
