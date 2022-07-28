@@ -37,6 +37,7 @@
         "HTML (Eex)",
         "plist"
     ],
+    "mayacode.python.port": 7002,
     
     // "python.analysis.extraPaths": [ " ./site-packages " ]
 }
