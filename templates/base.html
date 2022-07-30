@@ -11,11 +11,13 @@
         {% include 'partials/nav.html' %}
         {% block search-bar %}
             <form method="get" action="{% url 'rooms:search' %}">
+                <input type="hidden" name="country" value = "KR" />
                 <input name="city" placeholder = "Search by City" />
             </form>
         {% endblock search-bar %}
     </nav>
 
+    <! -- room_list -- !>
     {% block content %}{% endblock content %}
 
     {% include 'partials/footer.html' %}

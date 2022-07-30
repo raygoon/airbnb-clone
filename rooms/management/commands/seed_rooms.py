@@ -28,6 +28,8 @@ class Command(BaseCommand):
         seeder.add_entity(
             room_models.Room,
             number, {
+                # 'country': lambda x: "KR",
+                # 'city': lambda x: "Seoul",
                 'name': lambda x: seeder.faker.address(),
                 'host': lambda x: random.choice(all_users),
                 'room_type': lambda x: random.choice(room_types),
@@ -39,7 +41,7 @@ class Command(BaseCommand):
             },
         )
         created_photos = seeder.execute()
-        # seeder.execute()로 반환되는 값은 2차원 배열이므로 1차원 리스트로 바꿔준다.
+        # seeder.execute()로 반환되는 값은 2차원 배열임. flatten해서 1차원 리스트로 바꿔준다.
         # 예를 들면 [[13, 14, 15]] 이런식으로 출력되는 pk값을 [13, 14, 15] 이렇게 바꿔줌.
         created_clean = flatten(list(created_photos.values()))
         amenities = room_models.Amenity.objects.all()
@@ -47,6 +49,9 @@ class Command(BaseCommand):
         house_rules = room_models.HouseRule.objects.all()
         for pk in created_clean:
             room = room_models.Room.objects.get(pk=pk)
+            # print(f"나라:{room.country}")
+            # print(f"도시:{room.city}")
+
             for i in range(3, random.randint(10, 30)):
                 print(f"사진 {i-2}개 만드는 중")
                 room_models.Photo.objects.create(
