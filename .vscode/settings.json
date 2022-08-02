@@ -38,6 +38,14 @@
         "plist"
     ],
 
+    // "[python]": {
+    //     "editor.defaultFormatter": null,
+    //     "editor.insertSpaces": true,
+    //     "editor.tabSize": 4,
+    //     "editor.formatOnSave": true
+    // }
     
     // "python.analysis.extraPaths": [ " ./site-packages " ]
 }
+
+

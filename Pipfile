@@ -5,13 +5,13 @@ name = "pypi"
 
 [packages]
 django = "==3.2.8"
-black = "==21.9b0"
 pillow = "*"
 django-seed = "*"
+requests = "*"
+black = "*"
 
 [dev-packages]
 flake8 = "*"
-black = "*"
 pylint = "*"
 
 [requires]
