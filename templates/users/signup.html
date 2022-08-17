@@ -8,13 +8,22 @@ Sign up
 {% endblock search-bar %}
 
 {% block content %}
+<div class="col-center main-content">
+    <!-- 폼 시작 -->
+    <div class="col-center relative border w-80 p-5 rounded-md">
 
-    {% include 'partials/social_login.html' %}
+        <!-- 소셜 회원가입 -->
+        {% include 'partials/social_login.html' %}
+        <!-- 이메일 회원가입 -->
+        {% include 'mixins/auth/auth_form.html' with form=form cta="Sign up" %}
 
-    <form method="POST" action="{% url 'users:signup' %}"/>
-        {% csrf_token %}
-        {{form.as_p}}
-        <button>Sign up</button>
-    </form>
-
+        <!-- 로그인으로 이동 -->
+        <div class="flex justify-around w-full text-xs h-10 items-center pt-3">
+            <span>Do you have an account?</span>
+            <a href="{% url 'users:login' %}">
+                <button class="small-red-btn">Log in</button>
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock content %} 

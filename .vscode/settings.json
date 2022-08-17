@@ -7,12 +7,12 @@
     "python.linting.flake8Args": [
         "--max-line-length=200"
     ],
-    "python.pythonPath": "./bin/python",
     "python.linting.pylintArgs": [
         "--load-plugins",
         "pylint_django",
         "--max-line-length=200"
     ],
+    "python.linting.pycodestyleArgs": ["--ignore=E501"],
     "python.linting.pylintEnabled": true,
     "python.linting.pycodestyleEnabled": true,
     "auto-close-tag.activationOnLanguage": [
@@ -38,14 +38,10 @@
         "plist"
     ],
 
-    // "[python]": {
-    //     "editor.defaultFormatter": null,
-    //     "editor.insertSpaces": true,
-    //     "editor.tabSize": 4,
-    //     "editor.formatOnSave": true
-    // }
-    
-    // "python.analysis.extraPaths": [ " ./site-packages " ]
+    "emmet.includeLanguages": {
+        "postcss": "css"
+      }
+
 }
 
 

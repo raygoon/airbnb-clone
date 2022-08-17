@@ -1,9 +1,11 @@
-<a href="{% url 'core:home' %}">Nbnb</a> <a href="http://127.0.0.1:8000/admin/">Admin_page</a>
-<ul>
+<ul class="ul-nav pr-4 w-full">
+        
     {% if user.is_authenticated %}
-        <li><a href="{% url 'users:logout' %}">Log out</a></li>
+        <li class="li-nav"><a href="{{user.get_absolute_url}}">Profile</a></li>
+        <li class="li-nav w-14"><a href="{% url 'users:logout' %}">Log out</a></li>
     {% else %}
-        <li><a href="{% url 'users:login' %}">Log in</a></li>
-        <li><a href="{% url 'users:signup' %}">Sign up</a></li>
+        <li class="li-nav"><a href="/admin/">Admin</a></li>
+        <li class="li-nav w-14"><a href="{% url 'users:login' %}">Log in</a></li>
+        <li class="li-nav w-14"><a href="{% url 'users:signup' %}">Sign up</a></li>
     {% endif %}
 </ul>

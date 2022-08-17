@@ -92,7 +92,7 @@ class Room(core_models.TimeStampedModel):
         "users.User", related_name="rooms", on_delete=models.CASCADE
     )
 
-    # Foreinkey 는 Field가 1대다 의 관계일때 ManyToManyField 는 다대다의 관계일때 사용한다.
+    # Foreinkey 는 Field가 일대다 의 관계일때 ManyToManyField 는 다대다의 관계일때 사용한다.
     room_type = models.ForeignKey(
         "RoomType", related_name="rooms", on_delete=models.SET_NULL, null=True
     )
@@ -112,13 +112,22 @@ class Room(core_models.TimeStampedModel):
         return reverse("rooms:detail", kwargs={"pk": self.pk})
 
     def total_rating(self):
-        """ 전체 통계 계산 """
+        """전체 통계 계산"""
         all_reviews = self.reviews.all()
         all_ratings = 0
-        if (all_reviews.count() > 0):
+        if all_reviews.count() > 0:
             for review in all_reviews:
                 all_ratings += review.rating_average()
             return round(all_ratings / len(all_reviews), 2)
         return 0
 
+    # star icon rate
+    def total_rate(self):
+        total_rate = self.total_rating() / 5 * 100
+        return total_rate
+
     total_rating.short_description = "Avg."
+
+    def first_photo(self):
+        (photo,) = self.photos.all()[:1]
+        return photo.file.url

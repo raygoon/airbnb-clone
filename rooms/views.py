@@ -9,20 +9,20 @@ import re
 
 class HomeView(ListView):
 
-    """ HomeView Definition """
+    """HomeView Definition"""
 
     model = models.Room
-    paginate_by = 10
+    paginate_by = 12
     paginate_orphans = 5
-    ordering = 'created'
-    context_object_name = 'rooms'
+    ordering = "created"
+    context_object_name = "rooms"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         now = timezone.now()
         context["now"] = now
-        paginator = context['paginator']
-        page = self.request.GET.get('page')
+        paginator = context["paginator"]
+        page = self.request.GET.get("page")
         page_range = set_pagenumber_range(10, page, paginator)
         context["page_range"] = page_range
         return context
@@ -31,7 +31,7 @@ class HomeView(ListView):
 def room_detail(request, pk):
     try:
         room = models.Room.objects.get(pk=pk)
-        return render(request, "rooms/detail.html",  {'room': room})
+        return render(request, "rooms/detail.html", {"room": room})
     except models.Room.DoesNotExist:
         return redirect(reverse("core:home"))
         # raise Http404()
@@ -39,7 +39,7 @@ def room_detail(request, pk):
 
 class SearchView(View):
 
-    """ SearchView Definition"""
+    """SearchView Definition"""
 
     def get(self, request):
 
@@ -117,12 +117,16 @@ class SearchView(View):
                 current_url = request.get_full_path()
                 current_url = current_url.replace(f"&page={page}", "")
 
-                return render(request, "rooms/search.html", {
-                    "form": form,
-                    "rooms": rooms,
-                    "current_url": current_url,
-                    "page_range": page_range,
-                })
+                return render(
+                    request,
+                    "rooms/search.html",
+                    {
+                        "form": form,
+                        "rooms": rooms,
+                        "current_url": current_url,
+                        "page_range": page_range,
+                    },
+                )
 
         else:  # unbounded form
             form = forms.SearchForm()
@@ -133,6 +137,6 @@ class SearchView(View):
 def set_pagenumber_range(page_numbers_range, page, paginator):
     page_num = int(page) if page else 1
     start_index = int((page_num - 1) / page_numbers_range) * page_numbers_range
-    end_index = (start_index + page_numbers_range)
+    end_index = start_index + page_numbers_range
     page_range = paginator.page_range[start_index:end_index]
     return page_range

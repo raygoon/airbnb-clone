@@ -142,3 +142,6 @@ cython_debug/
 
 # 장고 업로드 폴더
 uploads/
+
+#node.js
+node_modules/

@@ -1,0 +1,37 @@
+<div class="flex flex-col items-center min-w-1/4 mb-6 px-2">
+    <a href="{% url 'rooms:detail' room.pk %}">
+    <!-- Room Photo -->
+        <div class="h-50 w-1280 w-1000 w-0810 w-0510 relative flex flex-col justify-between items-center rounded-md bg-cover bg-center" style="background-image: url({{room.first_photo}});">
+            <div class="flex px-2 w-11/12 h-6 absolute top-4 items-center rounded-md">
+                <span class="text-sm text-gray-600 font-semibold"></span>
+            </div>
+            <div class="flex items-center px-2 w-11/12 h-8 rounded-md absolute bg-opacity-90 bottom-2 bg-gray-50">
+                <span class="text-sm text-gray-600 truncate ...">{{room.name}}</span>
+            </div>
+        </div>
+        <!-- Infomation -->
+        <div class="flex flex-wrap justify-between px-2 w-1280 w-1000 w-0810 w-0510 pt-2 text-sm">
+            <div class="flex justify-between w-full">
+                    <span class="w-5/6 leading-4 truncate ...">{{room.city}} / {{room.country.name}}</span>
+                <div class="flex w-1/6 justify-end relative text-xs text-gray-300">
+                    {{room.total_rating}}
+                </div>
+            </div>
+            <div class="flex justify-between w-full">
+                <!-- SuperHost -->
+                <div class="pt-px relative">
+                    {% if room.host.superhost %}
+                    {% include 'mixins/auth/superhost.html' %}
+                    {% endif %}
+                </div>
+                <!-- Star-rate -->
+                <div class="w-10">
+                    <!-- star-rate-empty -->
+                    <div class="star-rate z-0 relative -left-9" style="background-image: url(/static/img/star_blank_small.png);"></div>
+                    <!-- star-rate-full -->
+                    <div class="star-rate z-10 relative -top-4 -left-9" style="background-image: url(/static/img/star_small.png); clip-path: polygon(0 0, {{room.total_rate}}% 0, {{room.total_rate}}% 100%, 0% 100%);"></div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

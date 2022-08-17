@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block page_title %}
-Login
+Update Profile
 {% endblock page_title %}
 
 {% block search-bar %}
@@ -12,16 +12,13 @@ Login
     <!-- 폼 시작 -->
     <div class="col-center relative border w-80 p-5 rounded-md">
 
-        <!-- 소셜 로그인 -->
-        {% include 'partials/social_login.html' %}
-        <!-- 이메일 로그인 -->
-        {% include 'mixins/auth/auth_form.html' with form=form cta="Log in" %}
+        <!-- 회원정보 수정 -->
+        {% include 'mixins/auth/auth_form.html' with form=form cta="Update Profile" %}
 
         <!-- 회원가입으로 이동 -->
         <div class="flex justify-around w-full text-xs h-10 items-center pt-3">
-            <span>Don't have an account?</span>
             <a href="{% url 'users:signup' %}">
-                <button class="small-red-btn">Sign up</button>
+                <button class="small-red-btn">Change Password</button>
             </a>
         </div>
     </div>

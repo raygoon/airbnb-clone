@@ -32,7 +32,12 @@
 		"prefix": "search_fields",
 		"body": ["search_fields = (\"$1\",)"],
 		"description": "장고 리스트 검색필드추가"
-	}
+	},
 
+	"int_pk": {
+		"prefix": "<int:pk>",
+		"body": ["\"<int:pk>/\", $1"],
+		"description": "장고 pk추가"
+	}
 
 }

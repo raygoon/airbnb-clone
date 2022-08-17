@@ -1,0 +1,9 @@
+{% if messages %}
+<ul class="absolute -top-16 mx-auto z-10 flex justify-center">
+    {% for message in messages %}
+    <li class="message message-shape {% if message.tags %}{{ message.tags }}{% endif %}">
+        {{message}}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
