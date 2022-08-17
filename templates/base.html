@@ -1,25 +1,34 @@
+{% load static %}
+{% load uuid %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en" class="font-display scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?{% uuid_code %}" />
     <title>{% block page_title %}{% endblock page_title %}| Nbnb</title>
-</head>
-<body>
-    <nav>
-        {% include 'partials/nav.html' %}
-        {% block search-bar %}
-            <form method="get" action="{% url 'rooms:search' %}">
-                <input type="hidden" name="country" value = "KR" />
-                <input name="city" placeholder = "Search by City" />
-            </form>
-        {% endblock search-bar %}
-    </nav>
-
-    <! -- room_list -- !>
-    {% block content %}{% endblock content %}
-
-    {% include 'partials/footer.html' %}
-</body>
+  </head>
+  <body>
+    <header class="col-center w-full">
+      {% include "partials/messages.html" %}
+      <div class="flex w-max max-w-7xl h-full">
+        <div class="flex w-screen pl-4 min-w-1/2 items-center h-full justify-self-auto">
+          <a href="{% url 'core:home' %}">
+            <img class="w-10 min-w-10" src="{% static 'img/logo.png' %}" />
+          </a>
+          {% block search-bar %}
+          <form method="get" action="{% url 'rooms:search' %}" class="flex m-0 pl-2 w-full h-full max-w-4xl items-center">
+            <input type="hidden" name="country" value="KR" />
+            <input name="city" placeholder="Search by City" class="search w-11/12"/>
+          </form>
+          {% endblock search-bar %}
+          {% include 'partials/nav.html' %}
+        </div>
+      </div>
+    </header>
+      <! -- room_list -- !>
+      {% block content %}{% endblock content %}
+      {% include 'partials/footer.html' %}
+  </body>
 </html>
